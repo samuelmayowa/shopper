@@ -1,0 +1,67 @@
+{% extends 'accounts/main.html' %}
+{% block content %}
+
+<!--Start of the shopping list display page-->
+    <br>
+<div class="row">
+    <div class="col-md">
+        <div class="card card-body">
+            <h5> Users </h5>
+            <hr>
+            <a class="btn btn-warning btn-sm btn-block" href="">Update My Profile</a>
+            <a class="btn btn-primary btn-sm btn-block" href="{% url 'create_order' user.id %}">Add Shopping List</a>
+        </div>
+    </div>
+    <div class="col-md">
+        <div class="card card-body">
+            <h5>Contact Information</h5>
+            <hr>
+            <p>Name: {{ user.username }}</p>
+            <p>Email: {{ user.email }}</p>
+        </div>
+    </div>
+    <div class="col-md">
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col">
+        <div class="card card-body">
+            <form method="get">
+            <button class="btn btn-primary" type="submit"> Search</button>
+                 <button class="btn btn-success" type="submit"> Print</button>
+                 <button class="btn btn-dark" type="submit"> Download</button>
+            </form>
+        </div>
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-md">
+        <div class="card card-body">
+            <table class="table table-sm">
+                <tr>
+                    <th>Category</th>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Status</th>
+                </tr>
+           {% for order in orders %}
+                <tr>
+                    <td>{{ order.category }}</td>
+                    <td>{{ order.product }}</td>
+                    <td>{{ order.quantity }}</td>
+                    <td>{{ order.status }}</td>
+                </tr>
+           {% endfor %}
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}
+
+<!--End of the shopping list display page-->

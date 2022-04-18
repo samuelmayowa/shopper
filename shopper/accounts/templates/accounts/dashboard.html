@@ -1,0 +1,89 @@
+{% extends 'accounts/main.html' %}
+{% block content %}
+{% include 'accounts/status.html' %}
+<br>
+
+    <!--Start of Dashboard/landping page for authorised users-->
+<div class="row">
+    <div class="col-md-5">
+    <tr>
+
+        <a class="btn btn-primary btn-sm btn-block" href="{% url 'list' %}"> View Shopping List</a>
+     </tr>
+
+        <hr>
+        <div class="card card-body">
+            <a class="btn btn-dark btn-sm btn-block" href="">Manage Category
+            </a>
+        <table class="table table-sm">
+            <tr>
+                <th>Category</th>
+                <th>Add</th>
+                <th>Update</th>
+                <th>Remove</th>
+
+            </tr>
+        <!--Start of for loop to iterate through the list and output it -->
+            {% for order in orders %}
+                    <tr>
+                        <td>{{ order.category }}</td>
+                        <td><a class="btn btn-sm btn-primary" href="{% url 'create_order' order.id %}">Add New Category </a></td>
+                        <td><a class="btn btn-sm btn-secondary" href="{% url 'update_order' order.id %}">Update</a></td>
+                        <td><a class="btn btn-sm btn-danger" href="{% url 'delete_order' order.id %}">Delete</a></td>
+            {% endfor %}
+        <!--End of for loop to iterate through the list and output it -->
+        </table>
+
+            <table class="table table-sm">
+                <tr>
+         <div class="card card-body">
+
+              </a>
+                </tr>
+                {% for user in users %}
+                    <tr>
+                        <td><a class="btn btn-success btn-sm btn-block" href="{% url 'create_order' user.id %}">Add Item To List </a>
+
+
+                    </tr>
+                {% endfor %}
+            </table>
+
+
+        </div>
+
+    </div>
+    <div class="col-md-7">
+        <h5>Recently Created Shopping List</h5>
+        <hr>
+        <div class="card card-body">
+            <a class="btn btn-info btn-sm btn-block" href="">Recently Created Shopping List</a>
+            <table class="table table-sm">
+                <tr>
+                    <th>Category</th>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Status
+                    <th>Add</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+                {% for order in orders %}
+                    <tr>
+                        <td>{{ order.category }}</td>
+                        <td>{{ order.product }}</td>
+                        <td>{{ order.quantity }}</td>
+                        <td>{{ order.status }}</td>
+                        <td><a class="btn btn-sm btn-info" href="{% url 'create_order' order.id %}">Add </a></td>
+                        <td><a class="btn btn-sm btn-warning" href="{% url 'update_order' order.id %}">Edit</a></td>
+                        <td><a class="btn btn-sm btn-danger" href="{% url 'delete_order' order.id %}">Delete</a></td>
+                    </tr>
+                {% endfor %}
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}
